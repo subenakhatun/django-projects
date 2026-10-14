@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def profile(request):
+def home(request):
     user_name = "Subena Khatun"  # এটি ব্যাকএন্ড বা ডাটাবেসের ডেটা
     
     # render ৩টি জিনিসকে এক জায়গায় মেলায়

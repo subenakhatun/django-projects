@@ -1,7 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 def home(request):
-    user_name = "Subena Khatun"  # এটি ব্যাকএন্ড বা ডাটাবেসের ডেটা
+    name = 'Subena khatun'
+    return render(request, 'home.html', {'name': name})
     
-    # render ৩টি জিনিসকে এক জায়গায় মেলায়
-    return render(request, 'home.html', {'name': user_name})

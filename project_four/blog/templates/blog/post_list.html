@@ -7,5 +7,38 @@
 </head>
 <body>
     <h1>Blog post list all information</h1>
+    <h2>Number Filters</h2>
+    <p><b>Price:</b> {{ price|floatformat:2 }}</p>
+    <p><b>Price Add +30:</b> {{ price|add:30 }}</p>
+    {% if price|divisibleby:2 %}
+        <p><b>Price is divisible by 2</b></p>
+    {% else %}
+        <p><b>Price is not divisible by 2</b></p>
+    {% endif %}
+
+    <hr>
+    <h2>Text Filters</h2>
+    {% comment %} Text Filter comments {% endcomment %}
+    <p><b>Name uppercaser:</b> {{ name|upper }}</p>
+    <p><b>Name lowercase:</b> {{ name|lower }}</p>
+    <p><b>Name title:</b> {{ name|title }}</p>
+    <p><b>Content truncatechars:</b> {{ content|truncatechars:30 }}</p>
+    <p><b>Name title:</b> {{ name|linebreaks }}</p>
+    <hr>
+    <h2>List Filters</h2>
+    <p><b>List length:</b> {{ skills|length }}</p>
+    <p><b>List first item:</b> {{ skills|first }}</p>
+    <p><b>List last item:</b> {{ skills|last }}</p>
+
+    <p>{{ name }}</p>
+    <p>{{ age }}</p>
+    <p>{{ user.name }}</p>
+    <p>{{ user.age }}</p>
+    <p>{{ blog.title }}</p>
+    <p>{{ blog.content|safe }}</p>
+    <p>{{ blog.created_at }}</p>
+    <p>{{ empty_value }}</p>
+    <p>{{ user.age }}</p>
+    <p>{{ a}}</p>
 </body>
 </html>

@@ -2,8 +2,9 @@ from django.shortcuts import render
 from datetime import datetime
 
 # Create your views here.
-def post_list(request):
-    return render(request,'blog/post_list.html')
+def postt(request):
+    a = 1000
+    return render(request,'blog/post_list.html',{'a': a})
 
 class User:
     def __init__(self, name, age):
@@ -13,7 +14,9 @@ class User:
 def home(request):
     context = {
         "name":"Subena khatun",
+        "content":" write anything you want to write in this content. This is a practice project of Django.",
         "age": 32,
+        "price":200,
         "skills":["Python","Django","Fest API","Javasciript","React","Machine laerning","Deep learning","Computer Vision"],
         "user":User("Unknown",33),
         "blog":{

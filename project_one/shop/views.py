@@ -6,3 +6,6 @@ def home(request):
 
 def products(request):
     return HttpResponse("Shop products page")
+
+
+    

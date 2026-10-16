@@ -29,6 +29,16 @@
     <p><b>List length:</b> {{ skills|length }}</p>
     <p><b>List first item:</b> {{ skills|first }}</p>
     <p><b>List last item:</b> {{ skills|last }}</p>
+    <p><b>List random item:</b> {{ skills|random }}</p>
+    <h2>Date and Time Filters</h2>
+    <p><b>Current Date:</b> {{ current_date|date:"Y-m-d" }}</p>
+    <p><b>Current Time:</b> {{ current_date|time:"H:i:s" }}</p>
+    <p><b>Current Date and Time:</b> {{ blog.created_at|date:"Y-m-d H:i:s" }}</p>
+    <p><b>Current Date and Time:</b> {{ blog.created_at|date:"l, F j, Y" }}</p>
+    <p><b>Current Date and Time:</b> {{ blog.created_at|date:"D, M j, Y" }}</p>
+    <p><b>Current Date and Time:</b> {{ blog.created_at|date:"Y-m-d H:i:s" }}</p>
+
+    <h3>Name Encode: {{ name|urlencode }}</h3>
 
     <p>{{ name }}</p>
     <p>{{ age }}</p>

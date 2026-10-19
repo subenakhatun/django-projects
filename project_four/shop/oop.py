@@ -8,7 +8,7 @@ country,birthdate, gender
 
 
 
-name = input("Enter your name:")
+# name = input("Enter your name:")
 # print(name)
 
 # Question: name tho likhlam, name er length ki hobe?
@@ -17,3 +17,4 @@ name = input("Enter your name:")
 # so seta k 2 ta way te bola jay. ak isdigit diye ba puru nam k string likhe . akon somossa ase, string tho number o hote pare
 # tar mane name er protita charater k checkkora lagbe jeno kunu number na hoy. jodi kunu number hoy thahole error dekhabe
 
+name = input("Enter your name:")

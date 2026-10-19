@@ -28,3 +28,22 @@ path(''apps_folder_name', views.functions_name, name="function er normal akta na
 
 views a joto function create hobe sob function ei jaygya ese path kore dite hobe
 ]
+
+
+
+Project Templates connect with apps: 
+mane project er temaplte er html file k apps er bitore templates er html file er moddhe connect:
+
+Step-1: 
+1. index.html -> title->{% block title %} My django projects {% endblock%}
+2. mainbody-> {%  block content %}  {%  endblock %}
+
+Step-2: 
+1. html file a sob bad dibo
+2.  {% extends "index.html"%}
+3. {% block title %} blogds {% endblock%}
+4. {%  block content %} 
+p
+h1
+ja mon chay tha tag
+ {%  endblock %}

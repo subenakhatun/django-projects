@@ -1,10 +1,10 @@
 from django.shortcuts import render
-import datetime
+from datetime import datetime
 
-from project_four import blog, shop
+
 
 # Create your views here.
-def product_list(request):
+def products(request):
     spost = [
         {"title":"Dhango Basics","is_featured":True, "author":"Mohit Kumar"},
         {"title":"Django Advanced","is_featured":False, "author":""},
@@ -12,7 +12,7 @@ def product_list(request):
     ]
 
     context = {
-        "shops": shop,
+        "shops": 'ok',
         "today": datetime.now(),
         "html_code":"<b>Welcome to My Blog</b>"
 

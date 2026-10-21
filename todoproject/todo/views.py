@@ -7,9 +7,9 @@ from .models import Task
 # tasks er ak ak kore sob list ei jaygay hobe
 # Task ক্লাসটিকে সরাসরি ডেটাবেজের টেবিলের রেকর্ডগুলোর সাথে কথা বলানোর বা ডেটা কুয়েরি করার কাজটি করে দেয় এই objects।
 def task_list(request):
-    tasks = Task.Objects.all().order_by('_created')
+    tasks = Task.objects.all().order_by('created')
     return render(request,'todo/tasklist.html',{'tasks':task_list})
 
 # create tasks
-def create_task(request):
+# def create_task(request):
     

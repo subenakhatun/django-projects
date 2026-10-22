@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
+# render: html file a send kora, redirect: ei url ei niye asha, get_object: j object ta kora hoise seta k call kore niye asha na hole error dkehabe
 from django.urls import reverse # পাইথন লজিক বা ভিউ ফাইল থেকে নির্দিষ্ট কোনো ইউআরএল-এর সঠিক ঠিকানা বা পাথ বের করার জন্যই মূলত reverse ব্যবহার করা হয়।
+# reverse: url e extact path
 # Create your views here.
 
 from .models import Task
@@ -21,6 +23,11 @@ def task_create(request):
             return redirect(reverse('todo:task_list'))
         error = 'Ttile can not be empty.'
         return render(request,'todo/task_form.html',{'error': error})
-    
+    return render(request, 'todo/task_form.html')
+
+
+# update ba Edit function
+def task_edit(request,pk):
+
 
     

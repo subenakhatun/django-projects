@@ -27,7 +27,74 @@ def task_create(request):
 
 
 # update ba Edit function
-def task_edit(request,pk):
-
-
+def task_update(request, pk):
+    task = get_object_or_404(Task, pk=pk)
     
+    if request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        description = request.POST.get('description', '').strip()
+        
+        if title:
+            task.title = title
+            task.description = description
+            task.save()
+            return redirect(reverse('todo:task_list'))
+            
+        error = 'Title can not be empty.'
+        return render(request, 'todo/task_form.html', {'task': task, 'error': error})
+        
+    return render(request, 'todo/task_form.html', {'task': task})
+
+# task list update
+'''
+question: ami ki update korte chai?
+answer: jokon browser a title description dibo seTa ami chaile edit korte parbo
+er jonno amak ki kora lage?
+1. def task_update(request,pk) nam a akta function create kora lagbe
+2. oi function a first er task er akta logic set korte hobe already j task ase seta
+task = Task.object(Task,pk)
+
+3. er pore amak post method er jonno logic korte hobe
+if request.method=='POSt':
+    title = title
+    descrption = descitpion
+    if title and description already ase tokon save korbo
+    er pore 
+'''
+
+def task_update(request, pk):
+    # পুরনো টাস্কটি খুঁজে বের করা ( ২ নম্বর স্টেপ)
+    task = get_object_or_404(Task, pk=pk)
+    
+    # POST মেথডের লজিক ( ৩ নম্বর স্টেপ)
+    if request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        description = request.POST.get('description', '').strip()
+        
+        # যদি টাইটেল খালি না থাকে, তবে আপডেট করে সেভ করব
+        if title:
+            task.title = title
+            task.description = description
+            task.save()
+            return redirect(reverse('todo:task_list'))
+            
+    return render(request, 'todo/task_form.html', {'task': task})
+
+# task list delete
+def task_delete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    
+    if request.method == 'POST':
+        task.delete()
+        return redirect(reverse('todo:task_list'))
+        
+    return render(request, 'todo/task_confirm_delete.html', {'task': task})
+
+def task_complete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    
+    # স্ট্যাটাসটি উল্টে দেওয়া (কমপ্লিট থাকলে আন-কমপ্লিট, আর না থাকলে কমপ্লিট)
+    task.completed = not task.completed
+    task.save()
+    
+    return redirect(reverse('todo:task_list'))

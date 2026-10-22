@@ -12,4 +12,15 @@ def task_list(request):
 
 # create tasks
 # def create_task(request):
+def task_create(request):
+    if request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        description = request.POST.get('description','').strip()
+        if title:
+            Task.objects.create(title=title,description=description)
+            return redirect(reverse('todo:task_list'))
+        error = 'Ttile can not be empty.'
+        return render(request,'todo/task_form.html',{'error': error})
+    
+
     

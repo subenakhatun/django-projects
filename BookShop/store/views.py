@@ -67,10 +67,10 @@ class CategoryDetailsAPIView(APIView):
 
 
 '''
-    # এখানে:
-    # request -> HTTP Request অবজেক্ট
-    # args    -> ()   (খালি tuple, কারণ পজিশনাল কিছু আসেনি)
-    # kwargs  -> {'pk': 2}  (URL থেকে আসা pk=2)
+    
+    # request -> HTTP Request object
+    # args    -> ()   (empty tuple)
+    # kwargs  -> {'pk': 2}  (URL theke asa pk=2)
 
 '''
 
@@ -117,7 +117,7 @@ class AuthorDetailAPIView(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixi
         return self.destroy(request,*args,**kwargs)
 
 
-    # Book API using Concrete Generic Views
+# Book API using Concrete Generic Views
 from .models import Book
 from .serializers import BookSerializers
 

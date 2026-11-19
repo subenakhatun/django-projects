@@ -14,8 +14,15 @@ class AuthorSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 # Book Serializers
-
 class BookSerializers(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all()
+    )
+
+    author = serializers.PrimaryKeyRelatedField(
+        queryset=Author.objects.all()
+    )
+
     class Meta:
         model = Book
         fields = '__all__'

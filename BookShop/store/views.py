@@ -21,7 +21,15 @@ from .serializers import CategorySeiralizers
 class CategoryListCreateAPIVIew(APIView):
     # Read Category
     def get(self,request):
-        categories = Category.objects.all()
+        categories = Category.objects.all() # sob data show korar jonno
         # convert Jeson File , call serializers
         serializer = CategorySeiralizers(categories,many=True) # ak sateh onek gula
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK) # status=status.HTTP_200_OK. na dile o hoy just bujar jonno deya j asole ki hocche
+    
+    # Create Category
+    def post(self,request):
+        serializer = CategorySeiralizers(data=request.data) # ১. asha data serializer kore dey
+        if serializer.is_valid(): # validation check korbe
+            serializer.save() # tik thakhle database a patanu 
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) # na hole errors show korbe

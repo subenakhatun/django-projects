@@ -31,9 +31,11 @@ class BookSerializers(serializers.ModelSerializer):
         queryset=Category.objects.all()
     )
 
-    author = serializers.PrimaryKeyRelatedField(
+    authors = serializers.PrimaryKeyRelatedField(
+        many=True,
         queryset=Author.objects.all()
     )
+    
 
     class Meta:
         model = Book

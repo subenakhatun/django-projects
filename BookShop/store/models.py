@@ -37,7 +37,7 @@ class Book(models.Model):
     stock= models.PositiveBigIntegerField(default=0)
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='books')
-    author = models.ForeignKey(Author,on_delete=models.CASCADE, related_name='books')
+    authors = models.ManyToManyField(Author,related_name='books')
 
     def __str__(self):
         return self.title

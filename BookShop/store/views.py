@@ -1,18 +1,18 @@
 # For HTML page rendaring
 from django.shortcuts import render
-
+from rest_framework import generics,mixins,viewsets
 # Error Handlaing 
 from django.shortcuts import get_object_or_404
 # Status pass 
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.decorators import action
 # return response
 from rest_framework.response import Response
+from .models import Author,Category,Book,AuthorProfile
+from .serializers import AuthorSerializers,CategorySeiralizers,BookSerializers,AuthorProfileSerializer
 # APIView create
-from rest_framework.views import APIView
-# Which Model
-from .models import Category
-# Which Serializer
-from .serializers import CategorySeiralizers
+
 
 # Create your views here.
 
@@ -75,9 +75,9 @@ class CategoryDetailsAPIView(APIView):
 '''
 
 # Author API. applying Genric and Mixins: GenericAPIView + Mixins
-from rest_framework import generics,mixins
-from .models import Author
-from .serializers import AuthorSerializers
+class AuthorProfileDetailsViewSet(generics.ListCreateAPIView):
+    queryset = AuthorProfile.objects.all()
+    serializer_class = AuthorProfileSerializer
 
 # list 
 class AuthorListCreateAPIView(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
@@ -118,8 +118,7 @@ class AuthorDetailAPIView(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixi
 
 
 # Book API using Concrete Generic Views
-from .models import Book
-from .serializers import BookSerializers
+
 
 # read and create
 class BookListCreateAPIView(generics.ListCreateAPIView):
@@ -133,8 +132,8 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 # Book niyei kaj korbo tobe modelviewset use kore ar custom action use kore
-from rest_framework import viewsets
-from rest_framework.decorators import action
+
+
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -156,3 +155,4 @@ class BookViewSet(viewsets.ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
+

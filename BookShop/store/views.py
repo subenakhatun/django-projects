@@ -134,8 +134,25 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 # Book niyei kaj korbo tobe modelviewset use kore ar custom action use kore
 from rest_framework import viewsets
+from rest_framework.decorators import action
+
+
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializers
 
-    
+    @action(detail=False, methods=['get'])
+
+    # total book ar sesh hoye jawa book er number dkeahnur jonno condition set kore deya
+    def summary(self, request):
+        books = self.get_queryset()
+        total_books = books.count()
+        out_of_stock = books.filter(stock__lte=0).count()
+
+        return Response(
+            {
+                'total_books': total_books,
+                'out_of_stock_books': out_of_stock,
+            },
+            status=status.HTTP_200_OK,
+        )

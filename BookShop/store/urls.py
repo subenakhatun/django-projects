@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from .views import (
     CategoryListCreateAPIVIew,
     CategoryDetailsAPIView,
@@ -6,8 +6,13 @@ from .views import (
     AuthorDetailAPIView,
     BookListCreateAPIView,
     BookDetailAPIView,
+    BookViewSet,
     
     )
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'v2/books', BookViewSet, basename='book-v2')
+
 urlpatterns = [
     # views.py তৈরি করার পর আমরা এখানে path() যুক্ত করব
     path('categories/',CategoryListCreateAPIVIew.as_view(),name='category-list-create'),
@@ -16,4 +21,5 @@ urlpatterns = [
     path('authors/<int:pk>/',AuthorDetailAPIView.as_view(),name='authors-detail'),
     path('books/',BookListCreateAPIView.as_view(),name='book-list-create'),
     path('books/<int:pk>/',BookDetailAPIView.as_view(),name='book-detail'),
+    path('', include(router.urls)),
 ]

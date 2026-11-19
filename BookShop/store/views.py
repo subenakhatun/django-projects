@@ -66,3 +66,76 @@ class CategoryDetailsAPIView(APIView):
     
 
 
+'''
+    # এখানে:
+    # request -> HTTP Request অবজেক্ট
+    # args    -> ()   (খালি tuple, কারণ পজিশনাল কিছু আসেনি)
+    # kwargs  -> {'pk': 2}  (URL থেকে আসা pk=2)
+
+'''
+
+# Author API. applying Genric and Mixins: GenericAPIView + Mixins
+from rest_framework import generics,mixins
+from .models import Author
+from .serializers import AuthorSerializers
+
+# list 
+class AuthorListCreateAPIView(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+    # Author er data niye asha lagbe
+    queryset = Author.objects.all()
+    # seralizations class use korte hobe
+    serializer_class = AuthorSerializers
+    # get
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args,**kwargs)
+    # post data 
+    def post(self,request,*args,**kwargs):
+        return self.create(request,*args,**kwargs)
+
+
+    # Author Detials
+class AuthorDetailAPIView(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView,):
+    # Author er data niye asha lagbe
+    queryset = Author.objects.all()
+    # seralizations class use korte hobe
+    serializer_class = AuthorSerializers
+
+    # retirive
+    def get(self,request,*args,**kwargs):
+        return self.retrieve(request,*args,**kwargs)
+
+    # update
+    def put(self,request,*args,**kwargs):
+        return self.update(request,*args,**kwargs)
+
+    # partial update
+    def patch(self,request,*args,**kwargs):
+        return self.partial_update(request,*args,**kwargs)
+
+    # Delete or destroy
+    def delete(self,request,*args,**kwargs):
+        return self.destroy(request,*args,**kwargs)
+
+
+    # Book API using Concrete Generic Views
+from .models import Book
+from .serializers import BookSerializers
+
+# read and create
+class BookListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializers
+
+# retirve,update,delete
+class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializers
+
+
+# Book niyei kaj korbo tobe modelviewset use kore ar custom action use kore
+from rest_framework import viewsets
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializers
+
+    

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category,Author,Book
+from .models import Category,Author,Book,AuthorProfile
 
 # Category Serializers
 class CategorySeiralizers(serializers.ModelSerializer):
@@ -7,11 +7,23 @@ class CategorySeiralizers(serializers.ModelSerializer):
         model = Category
         fields = '__all__' 
 
+# Author Profile Serializers
+class AuthorProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthorProfile
+        fields = '__all__'
+
 # Author Srializers
 class AuthorSerializers(serializers.ModelSerializer):
+    profile = AuthorProfileSerializer(read_only=True)
     class Meta:
         model = Author
         fields = '__all__'
+
+
+
+
+
 
 # Book Serializers
 class BookSerializers(serializers.ModelSerializer):

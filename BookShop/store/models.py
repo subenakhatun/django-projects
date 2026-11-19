@@ -17,6 +17,19 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+# Author Profile Model
+class AuthorProfile(models.Model):
+    # Author er sathe connected
+    author = models.OneToOneField(Author,on_delete = models.CASCADE,related_name = 'profile')
+    phone = models.CharField(max_length=15)
+    address = models.CharField(max_length=200)
+    bio = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.author.name
+
+
+
 # BOOK list Model
 class Book(models.Model):
     title = models.CharField(max_length=200)
